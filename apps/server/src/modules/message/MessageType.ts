@@ -29,6 +29,6 @@ const MessageConnection = connectionDefinitions({
 	nodeType: MessageType,
 });
 
-registerTypeLoader(MessageType, MessageLoader.load);
+registerTypeLoader(MessageType, MessageLoader.Load);
 
 export { MessageType, MessageConnection };

@@ -27,6 +27,6 @@ import { wsServer } from './server/wsServer';
 
 	server.listen(config.PORT, () => {
 		// eslint-disable-next-line
-		console.log(`Server running on port:${config.PORT}`);
+		console.log(`🚀 Server running on http://localhost:${config.PORT}`);
 	});
 })();
