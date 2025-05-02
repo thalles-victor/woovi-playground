@@ -6,7 +6,7 @@ import * as bcrypt from "bcrypt"
 import { PayloadType } from "../../../@shared/types";
 import { envParsed } from "../../../config"
 
-export async function signIn(signInDto: SignInDto): Promise<AuthResponse> {
+export async function signInUseCase(signInDto: SignInDto): Promise<AuthResponse> {
   validateSchema(signInDto, signInDtoSchema);
 
   const userExist = await UserModel.findOne({
@@ -23,13 +23,6 @@ export async function signIn(signInDto: SignInDto): Promise<AuthResponse> {
   if (userExist.deletedAt) {
     throw new CustomErrorResponse({
       message: "user deleted or banned",
-      statusCode: 406,
-    });
-  }
-
-  if (!userExist.password) {
-    throw new CustomErrorResponse({
-      message: "It is necessary to register a password",
       statusCode: 406,
     });
   }

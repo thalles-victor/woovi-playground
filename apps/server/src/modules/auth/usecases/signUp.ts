@@ -6,6 +6,7 @@ import JWT from "jsonwebtoken"
 import { WalletModel } from "../../wallet/WalletModel";
 import { PayloadType } from "../../../@shared/types";
 import { envParsed } from "../../../config";
+import * as bcrypt from "bcrypt"
 
 export async function signUpUseCase(signUpDto: SignUpDto): Promise<AuthResponse> {
   validateSchema(signUpDto, signUpDtoSchema);
@@ -37,16 +38,19 @@ export async function signUpUseCase(signUpDto: SignUpDto): Promise<AuthResponse>
       });
     }
 
+    const salt = await bcrypt.genSalt(12)
+    const hashedPassword = await bcrypt.hash(signUpDto.password, salt)
+
     const [userCreated] = await UserModel.create(
       [
         {
           name: signUpDto.name,
           email: signUpDto.email,
           cpfCnpj: signUpDto.cpfCnpj,
-          deletedAt: null,
-          password: null,
+          password: hashedPassword,
           createdAt: new Date(),
           updatedAt: new Date(),
+          deletedAt: null,
         },
       ],
       {

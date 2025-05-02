@@ -8,8 +8,8 @@ interface IUser {
   cpfCnpj: string;
   activatedAt: Date | null;
   deletedAt: Date | null;
-  password: string | null;
-  role:  RoleType;
+  password: string;
+  role: RoleType;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -18,7 +18,7 @@ export const userSchema = new mongoose.Schema<IUser>({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true, indexes: true },
   cpfCnpj: { type: String, required: true, unique: true, indexes: true },
-  password: { type: String, required: false, default: null },
+  password: { type: String },
   deletedAt: { type: Date, required: false, default: null },
   role: { type: String, enum: ROLE, required: true, default: "USER" },
   createdAt: { type: Date, required: true },

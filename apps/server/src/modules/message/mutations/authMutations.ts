@@ -1,5 +1,6 @@
-import { signUpResolverMutation } from "./AuthAddMutation";
+import { signInResolverMutation, signUpResolverMutation } from "./AuthAddMutation";
 
 export const authMutations = {
-  signUp: signUpResolverMutation
+  signUp: signUpResolverMutation,
+  singIn: signInResolverMutation
 }

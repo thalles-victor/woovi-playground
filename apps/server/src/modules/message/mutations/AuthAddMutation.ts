@@ -1,7 +1,8 @@
 import { GraphQLInputObjectType, GraphQLNonNull, GraphQLObjectType, GraphQLString } from "graphql";
 import { mutationWithClientMutationId } from "graphql-relay";
-import { SignUpDto } from "../../auth/usecases/auth.dtos";
+import { SignInDto, SignUpDto } from "../../auth/usecases/auth.dtos";
 import { signUpUseCase } from "../../auth/usecases/signUp";
+import { signInUseCase } from "../../auth/usecases/signIn";
 
 
 const SignUpInputType = new GraphQLInputObjectType({
@@ -20,6 +21,19 @@ const SignUpInputType = new GraphQLInputObjectType({
     cpfCnpj: {
       type: GraphQLString
     }
+  })
+})
+
+const SignInInputType = new GraphQLInputObjectType({
+  name: "singInInput",
+  description: "Input type for sign up",
+  fields: () => ({
+    email: {
+      type: GraphQLString
+    },
+    password: {
+      type: GraphQLString
+    },
   })
 })
 
@@ -84,5 +98,23 @@ export const signUpResolverMutation = mutationWithClientMutationId({
     const authResponse = await signUpUseCase(dto);
 
     return { data: { user: authResponse.user, accessToken: authResponse.accessToken } }
+  }
+})
+
+
+export const signInResolverMutation = mutationWithClientMutationId({
+  name: "signIn",
+  inputFields: {
+    signInDto: {
+      type: SignInInputType
+    }
+  },
+  outputFields: { data: { type: AuthResponseObjType } },
+  mutateAndGetPayload: async (args: any) => {
+    const dto = args.signInDto as SignInDto;
+
+    const authResult = await signInUseCase(dto);
+
+    return { data: { user: authResult.user, accessToken: authResult.accessToken } }
   }
 })
