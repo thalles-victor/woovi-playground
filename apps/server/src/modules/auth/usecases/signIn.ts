@@ -1,12 +1,12 @@
-import JWT from "jsonwebtoken" 
-import { SignInDto, signInDtoSchema } from "./auth.dtos";
-import {CustomErrorResponse, validateSchema} from "../../error/validateSchema"
-import {UserModel} from "../../user/UserModel"
+import JWT from "jsonwebtoken"
+import { AuthResponse, SignInDto, signInDtoSchema } from "./auth.dtos";
+import { CustomErrorResponse, validateSchema } from "../../error/validateSchema"
+import { UserModel } from "../../user/UserModel"
 import * as bcrypt from "bcrypt"
 import { PayloadType } from "../../../@shared/types";
-import {envParsed} from "../../../config"
- 
-export async function  signIn(signInDto: SignInDto) {
+import { envParsed } from "../../../config"
+
+export async function signIn(signInDto: SignInDto): Promise<AuthResponse> {
   validateSchema(signInDto, signInDtoSchema);
 
   const userExist = await UserModel.findOne({
@@ -23,13 +23,6 @@ export async function  signIn(signInDto: SignInDto) {
   if (userExist.deletedAt) {
     throw new CustomErrorResponse({
       message: "user deleted or banned",
-      statusCode: 406,
-    });
-  }
-
-  if (!userExist.activatedAt) {
-    throw new CustomErrorResponse({
-      message: "require activate account",
       statusCode: 406,
     });
   }
@@ -69,7 +62,6 @@ export async function  signIn(signInDto: SignInDto) {
       createdAt: userExist.createdAt,
       updatedAt: userExist.updatedAt,
       deletedAt: userExist.deletedAt,
-      activatedAt: userExist.activatedAt,
       role: userExist.role,
     },
     accessToken: {

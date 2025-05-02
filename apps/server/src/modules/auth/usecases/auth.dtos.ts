@@ -1,5 +1,20 @@
-import {z} from "zod"
- 
+import { z } from "zod"
+import { RoleType } from "../../../@shared/types"
+
+export type AuthResponse = {
+  user: {
+    name: string,
+    email: string,
+    createdAt: Date,
+    updatedAt: Date,
+    deletedAt: Date | null,
+    role: RoleType,
+  },
+  accessToken: {
+    token: string,
+    expiresIn: string,
+  }
+}
 
 export const signUpDtoSchema = z.object({
   name: z.string().min(1).max(100),
@@ -17,3 +32,4 @@ export const signInDtoSchema = z.object({
 })
 
 export type SignInDto = z.infer<typeof signInDtoSchema>
+
