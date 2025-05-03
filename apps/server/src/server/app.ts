@@ -40,8 +40,7 @@ routes.all(
 );
 
 routes.get('/', async (ctx) => {
-	// const filePath = path.join(__dirname, '..', 'public', 'index.html');
-	const filePath = path.join(__dirname, "home.html");
+	const filePath = path.join(__dirname, '..', 'public', 'home.html');
 	ctx.type = 'html';
 	ctx.body = fs.createReadStream(filePath);
 });
