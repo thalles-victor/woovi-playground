@@ -28,6 +28,7 @@ const envSchema = z.object({
 	MONGO_URI: z.string(),
 	JWT_SECRET: z.string().min(100),
 	JWT_EXPIRES_IN: z.string().default('1d'),
+	REDIS_HOST: z.string().nonempty()
 })
 
 export const envParsed = envSchema.parse(ENV);
