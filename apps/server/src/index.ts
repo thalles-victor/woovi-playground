@@ -18,15 +18,16 @@ import { wsServer } from './server/wsServer';
 	createGraphqlWs(server, '/graphql/ws', {
 		schema,
 		context: getContext(),
+
 	});
 
 	createGraphqlWs(server, '/console/graphql/ws', {
-		schema,
-		context: async () => getContext(),
+		schema, context: async () => getContext(),
+
 	});
 
 	server.listen(config.PORT, () => {
 		// eslint-disable-next-line
-		console.log(`Server running on port:${config.PORT}`);
+		console.log(`🚀🚀🚀 Server running on http://localhost:${config.PORT}`);
 	});
 })();

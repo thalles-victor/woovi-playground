@@ -1,4 +1,5 @@
 import path from 'path';
+import {z} from "zod"
 
 import dotenvSafe from 'dotenv-safe';
 
@@ -13,9 +14,20 @@ dotenvSafe.config({
 
 const ENV = process.env;
 
-const config = {
+/**@deprecated */
+export const config = {
 	PORT: ENV.PORT ?? 4000,
 	MONGO_URI: ENV.MONGO_URI ?? '',
+	JWT_SECRET: ENV.JWT_SECRET ?? '',
+	JWT_EXPIRES_IN: ENV.JWT_EXPIRES_IN ?? '',
 };
 
-export { config };
+const envSchema = z.object({
+		PORT: z.string().default('4000'),
+		MONGO_URI: z.string(),
+		JWT_SECRET: z.string().min(100),
+		JWT_EXPIRES_IN: z.string().default('1d'),
+})
+
+export const envParsed = envSchema.parse(ENV);
+
