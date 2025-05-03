@@ -79,3 +79,214 @@ bbd63bbbbf51   redis                       "docker-entrypoint.s…"   4 hours ag
 ## 🏁 Acessando a aplicação
 
 Para acessar a apicação você pode consultar com algum client http na url http://localhost:4000 para o servidor 1 e http://localhost:4001 para o servidor 2, além disso nos endpoints /graphql vai encontrar o playground graphql para testar sua api.
+
+### Criando uma conta na aplicação:
+
+Para criar uma conta na aplicação é nescessário fazer a query abaxio lembrando que o mail e cpfCnpj devem ser único e o cpfCnpj vai ser usado para fazer a transações bancárias.
+
+Para gerar um cpfCnpj use um [gerador de cpf online](https://www.4devs.com.br/gerador_de_cpf)
+
+```gql
+mutation {
+  signUp(
+    input: {
+      signUpDto: {
+        name: "thalles"
+        email: "thalles2@gmail.com"
+        cpfCnpj: "588888666121"
+        password: "@#dssdfsdfds"
+      }
+    }
+  ) {
+    data {
+      user {
+        name
+        email
+        createdAt
+        updatedAt
+        deletedAt
+        role
+      }
+      accessToken {
+        token
+        expiresIn
+      }
+    } 
+  }
+}
+```
+
+#### Para se autenticar use a mutation abaixo:
+
+```gql
+mutation {
+  signIn(
+    input: {
+      signInDto: {
+        email: "thalles@gmail.com"
+        password: "@#dssdfsdfds"
+      }
+    }
+  ) {
+    data {
+      user {
+        name
+        email
+        createdAt
+        updatedAt
+        deletedAt
+        role
+      }
+      accessToken {
+        token
+        expiresIn
+      }
+    }
+  } 
+}
+```
+
+Tanto a cração da conta quanto a a autenticação vai trazer informações do usuário e do token de acesso como no exemplo abaixo:
+
+```gql
+{
+  "data": {
+    "signUp": {
+      "data": {
+        "user": {
+          "name": "thalles",
+          "email": "thalles@gmail.com",
+          "createdAt": "1746297339379",
+          "updatedAt": "1746297339379",
+          "deletedAt": null,
+          "role": "USER"
+        },
+        "accessToken": {
+          "token": "eyJhbGc...",
+          "expiresIn": "1d"
+        }
+      }
+    }
+  }
+}
+```
+
+### Consultando a carteira:
+Com o usuário autenticado, ele pode consultar a carteira bancária rodando a query abaixo passando nos haders o authorization com o barer token: 
+
+```graphql
+query {
+  getWallet {
+    id
+    balance
+    userId
+    cpfCnpj
+    createdAt
+    updatedAt
+    deletedAt
+  }
+}
+```
+a saida experada vai ser nesse formato: 
+```graphql
+{
+  "data": {
+    "getWallet": {
+      "id": "V2FsbGV0OjY4MTRmNWM0OTVkMTExNjIyZTA4Y2QyNw==",
+      "balance": 0,
+      "userId": "6814f5c495d111622e08cd25",
+      "cpfCnpj": "56565666121",
+      "createdAt": "1746204100270",
+      "updatedAt": "1746204100270",
+      "deletedAt": null
+    }
+  }
+}
+```
+
+Caso o usuário seja um super (ROOT ou ADMIN) ele pode consultar a carteira bancária de todos os outros usuários fazendo essa query: 
+
+```gql
+query {
+  getAllWalletAsSuper {
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    edges {
+      node {
+        id
+        balance
+        userId
+        cpfCnpj
+        createdAt
+        updatedAt
+        deletedAt
+      }
+      cursor
+    }
+  } 
+}
+```
+
+### Transações
+
+Caso o usuário super queira consultar todas as transações ele pode rodar a query
+
+```gql
+query {
+  getAllTransactionsAsSuper {
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    edges {
+      node {
+        id
+        fromCpfCnpj
+        toCpfCnpj
+        value
+        createdAt
+      }
+      cursor
+    }
+  } 
+}
+```
+
+A resposta será como
+
+```gql
+{
+  "data": {
+    "getAllTransactionsAsSuper": {
+      "pageInfo": {
+        "hasNextPage": false,
+        "hasPreviousPage": false,
+        "startCursor": "YXJyYXljb25uZWN0aW9uOjA=",
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjA="
+      },
+      "edges": [
+        {
+          "node": {
+            "id": "68156697edd92992ac1f050f",
+            "fromCpfCnpj": "56565666121",
+            "toCpfCnpj": "588888666121",
+            "value": "10",
+            "createdAt": "1746232983539"
+          },
+          "cursor": "YXJyYXljb25uZWN0aW9uOjA="
+        }
+      ]
+    }
+  }
+}
+```
+
+## Rate limiter
+
+Este sistema tem um mecanismo de proteção chamdo Rate limiter, caso o número de requisições exetam o valor configurado no servidor uma menssagem como: **Sometimes You Just Have to Slow Down** com o status code de 429 impedindo de prosseguir com novas requisições. Assim que o tempo acabar já vai ser possível continuar usando a API com moderação.
