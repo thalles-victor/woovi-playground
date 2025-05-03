@@ -43,4 +43,4 @@ jobs:
             echo "Installing dependencies..."
             npm install --legacy-peer-deps
             echo "Starting the server..."
-            docker compose -f backend-docker-compose.yml up -d
+            docker compose -f backend-docker-compose.yml up --build --force-recreate -d
