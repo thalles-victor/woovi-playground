@@ -39,8 +39,9 @@ jobs:
             source "$NVM_DIR/nvm.sh"
             cd /projects/apps/server
             echo "Installing dependencies..."
-            npm install
-            echo "Building project..."
-            npm run build
-            echo "Restarting server..."
-            pm2 restart all
+            npm install --legacy-peer-deps
+            npm run dev
+            # echo "Building project..."
+            # npm run build
+            # echo "Restarting server..."
+            # pm2 restart all
