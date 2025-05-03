@@ -8,6 +8,7 @@ import { WalletModel } from "../../wallet/WalletModel";
 import { PayloadType } from "../../../@shared/types";
 import { envParsed } from "../../../config";
 import * as bcrypt from "bcrypt"
+import { ROLE } from "../../../@shared/metadata";
 
 export async function signUpUseCase(signUpDto: SignUpDto): Promise<AuthResponse> {
   validateSchema(signUpDto, signUpDtoSchema);
@@ -41,6 +42,7 @@ export async function signUpUseCase(signUpDto: SignUpDto): Promise<AuthResponse>
 
     const salt = await bcrypt.genSalt(12)
     const hashedPassword = await bcrypt.hash(signUpDto.password, salt)
+    const userRole: keyof typeof ROLE = envParsed.ADMIN_EMAIL === signUpDto.email ? "ADMIN" : "USER"
 
     const [userCreated] = await UserModel.create(
       [
@@ -52,6 +54,7 @@ export async function signUpUseCase(signUpDto: SignUpDto): Promise<AuthResponse>
           createdAt: new Date(),
           updatedAt: new Date(),
           deletedAt: null,
+          role: userRole
         },
       ],
       {
@@ -62,7 +65,7 @@ export async function signUpUseCase(signUpDto: SignUpDto): Promise<AuthResponse>
     await WalletModel.create(
       [
         {
-          balance: 0,
+          balance: 10000,
           userId: userCreated._id.toString(),
           cpfCnpj: userCreated.cpfCnpj,
           deletedAt: null,
@@ -76,8 +79,8 @@ export async function signUpUseCase(signUpDto: SignUpDto): Promise<AuthResponse>
     );
 
     const payload: PayloadType = {
-      role: 'USER',
       sub: userCreated._id.toString(),
+      role: userCreated.role,
     }
 
 

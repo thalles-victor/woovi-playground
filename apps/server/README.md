@@ -40,7 +40,6 @@ REDIS_HOST="redis://redis:6379"
 # Jwt
 JWT_SECRET=
 JWT_SECRET_EXPIRES_IN="1d"
-
 ```
 
 - 🔑 Para ter acesso ao root, as credenciais do mesmo devem ser passadas no arquivo env, passando o id ele vai criar o usuário e salvar no banco na hóra que o dono do id fazer a autenticação com o discord.
@@ -51,6 +50,22 @@ JWT_SECRET_EXPIRES_IN="1d"
 
 ```
 node -e "console.log(require('crypto').randomBytes(200).toString('base64'))"
+```
+
+se caso a aplicação não rodar por um erro como esse siguinifica que as variáveis de ambiente não foram passadas corretamente e é recomendavel que consulte a documentação para sincronizar com o arquivo .env: 
+
+```
+ZodError: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "JWT_SECRET"
+    ],
+    "message": "Required"
+  }
+]
 ```
 
 ### ⚡ Rodando o projeto.
@@ -259,7 +274,6 @@ query {
 ```
 
 A resposta será como
-
 ```gql
 {
   "data": {
@@ -289,4 +303,4 @@ A resposta será como
 
 ## Rate limiter
 
-Este sistema tem um mecanismo de proteção chamdo Rate limiter, caso o número de requisições exetam o valor configurado no servidor uma menssagem como: **Sometimes You Just Have to Slow Down** com o status code de 429 impedindo de prosseguir com novas requisições. Assim que o tempo acabar já vai ser possível continuar usando a API com moderação.
+Este sistema tem um mecanismo de proteção chamdo Rate limiter, caso o número de requisições exetam o valor configurado no servidor uma menssagem como: **Sometimes You Just Have to Slow Down** com o status code de 429 impede de prosseguir com novas requisições em um determinado tempo. Assim que esse tempo se esgotar será possível continuar desfrutando da api mas com moderação.

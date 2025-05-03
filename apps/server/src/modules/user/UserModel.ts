@@ -7,7 +7,6 @@ interface IUser {
   name: string;
   email: string;
   cpfCnpj: string;
-  activatedAt: Date | null;
   deletedAt: Date | null;
   password: string;
   role: RoleType;

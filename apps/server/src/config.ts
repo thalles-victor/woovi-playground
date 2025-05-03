@@ -24,11 +24,22 @@ export const config = {
 };
 
 const envSchema = z.object({
+	// Environment variables for the server application 
 	PORT: z.string().default('4000'),
+	APPLICATION_STAGE: z.enum(['dev', 'prod']),
+
+	// MongoDB
 	MONGO_URI: z.string(),
+
+	// Redis
+	REDIS_HOST: z.string().nonempty(),
+
+	// JWT
 	JWT_SECRET: z.string().min(100),
 	JWT_EXPIRES_IN: z.string().default('1d'),
-	REDIS_HOST: z.string().nonempty()
+
+	// ADMIN
+	ADMIN_EMAIL: z.string().email(),
 })
 
 export const envParsed = envSchema.parse(ENV);
