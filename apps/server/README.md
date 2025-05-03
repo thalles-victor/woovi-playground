@@ -248,7 +248,45 @@ query {
 
 ### Transações
 
-Caso o usuário super queira consultar todas as transações ele pode rodar a query
+Para crirar uma transação use a mutation abaixo:
+
+```gql
+mutation {
+  createTransaction(
+    input: {
+      transactionDto: {
+        value: 10,
+        toCpfCnpj: "588888666121"
+      }
+    }
+  ) {
+    data {
+      transaction {
+        id
+        fromCpfCnpj
+        toCpfCnpj
+        value
+        createdAt
+      }
+      wallet {
+        id
+        balance
+        userId
+        cpfCnpj
+        createdAt
+        updatedAt
+        deletedAt
+      }
+    }
+    clientMutationId
+  }
+}
+```
+Ao exetuar essa ação ele vai retornar os dados da transação e a carteira atulizada do usuário autenticado que fez a transação.
+
+
+#### Consultar todas as transações como super usuário
+Caso o super usuário queira consultar todas as transações ele pode rodar a query
 
 ```gql
 query {
