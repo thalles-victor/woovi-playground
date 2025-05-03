@@ -9,6 +9,8 @@ import logger from 'koa-logger';
 import { schema } from '../schema/schema';
 import { getContext } from './getContext';
 import { createWebsocketMiddleware } from './websocketMiddleware';
+import * as fs from 'fs';
+import * as path from 'path';
 
 const app = new Koa();
 
@@ -36,6 +38,15 @@ routes.all(
 		context: getContext(req),
 	}))
 );
+
+routes.get('/', async (ctx) => {
+	// const filePath = path.join(__dirname, '..', 'public', 'index.html');
+	const filePath = path.join(__dirname, "home.html");
+	ctx.type = 'html';
+	ctx.body = fs.createReadStream(filePath);
+});
+
+
 
 app.use(routes.routes());
 app.use(routes.allowedMethods());
