@@ -35,7 +35,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /projects
+            cd /projects/apps/server
             echo "Installing dependencies..."
             npm install
             echo "Building project..."
