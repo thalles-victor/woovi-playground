@@ -17,7 +17,7 @@ export const messageConnectionField = (key: string) => ({
 			...connectionArgs,
 		},
 		resolve: async (_, args, context) => {
-			return await MessageLoader.loadAll(context, args);
+			return await MessageLoader.load(context, args);
 		},
 	},
 });

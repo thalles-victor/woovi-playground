@@ -1,12 +1,11 @@
-import { GraphQLInputObjectType, GraphQLNonNull, GraphQLObjectType, GraphQLString } from "graphql";
+import { GraphQLInputObjectType, GraphQLObjectType, GraphQLString } from "graphql";
 import { mutationWithClientMutationId } from "graphql-relay";
-import { SignInDto, SignUpDto } from "../../auth/usecases/auth.dtos";
-import { signUpUseCase } from "../../auth/usecases/signUp";
-import { signInUseCase } from "../../auth/usecases/signIn";
+import { SignUpDto } from "../usecases/auth.dtos";
+import { signUpUseCase } from "../usecases/signUp";
 
 
 const SignUpInputType = new GraphQLInputObjectType({
-  name: "singUpInput",
+  name: "singUpInputType",
   description: "Input type for sign up",
   fields: () => ({
     name: {
@@ -24,27 +23,14 @@ const SignUpInputType = new GraphQLInputObjectType({
   })
 })
 
-const SignInInputType = new GraphQLInputObjectType({
-  name: "singInInput",
-  description: "Input type for sign up",
-  fields: () => ({
-    email: {
-      type: GraphQLString
-    },
-    password: {
-      type: GraphQLString
-    },
-  })
-})
 
-
-const AuthResponseObjType = new GraphQLObjectType({
-  name: "authDto",
+const SignUpResponseObjType = new GraphQLObjectType({
+  name: "signUpResponse",
   description: "Auth response",
   fields: () => ({
     user: {
       type: new GraphQLObjectType({
-        name: "user",
+        name: "userSignUpResponse",
         fields: () => ({
           name: {
             type: GraphQLString
@@ -69,7 +55,7 @@ const AuthResponseObjType = new GraphQLObjectType({
     },
     accessToken: {
       type: new GraphQLObjectType({
-        name: "accessToken",
+        name: "accessTokenSignUpResponse",
         fields: () => ({
           token: {
             type: GraphQLString
@@ -91,7 +77,7 @@ export const signUpResolverMutation = mutationWithClientMutationId({
       type: SignUpInputType
     }
   },
-  outputFields: { data: { type: AuthResponseObjType } },
+  outputFields: { data: { type: SignUpResponseObjType } },
   mutateAndGetPayload: async (args: any) => {
     const dto = args.signUpDto as SignUpDto;
 
@@ -102,19 +88,3 @@ export const signUpResolverMutation = mutationWithClientMutationId({
 })
 
 
-export const signInResolverMutation = mutationWithClientMutationId({
-  name: "signIn",
-  inputFields: {
-    signInDto: {
-      type: SignInInputType
-    }
-  },
-  outputFields: { data: { type: AuthResponseObjType } },
-  mutateAndGetPayload: async (args: any) => {
-    const dto = args.signInDto as SignInDto;
-
-    const authResult = await signInUseCase(dto);
-
-    return { data: { user: authResult.user, accessToken: authResult.accessToken } }
-  }
-})

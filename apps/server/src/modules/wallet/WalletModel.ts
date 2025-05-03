@@ -1,13 +1,7 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Model, Schema, Document } from "mongoose";
 
-interface IWallet {
-  balance: number;
-  userId: string;
-  cpfCnpj: string;
-  createdAt: Date;
-  updatedAt: Date;
-  deletedAt: Date;
-}
+
+
 
 export const walletSchema = new mongoose.Schema<IWallet>({
   balance: { type: Schema.Types.Number, required: true },
@@ -18,4 +12,13 @@ export const walletSchema = new mongoose.Schema<IWallet>({
   updatedAt: { type: Date, required: true },
 });
 
-export const WalletModel = mongoose.model<IWallet>("Wallet", walletSchema);
+export type IWallet = {
+  balance: number;
+  userId: string;
+  cpfCnpj: string;
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: Date;
+} & Document
+
+export const WalletModel: Model<IWallet> = mongoose.model("Wallet", walletSchema);
