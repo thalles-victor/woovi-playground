@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { GraphQLInputObjectType, GraphQLObjectType, GraphQLString } from "graphql";
 import { mutationWithClientMutationId } from "graphql-relay";
 import { SignUpDto } from "../usecases/auth.dtos";

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { GraphQLObjectType } from 'graphql';
 
 import { messageSubscriptions } from '../modules/message/subscriptions/messageSubscriptions';

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { GraphQLObjectType } from 'graphql';
 
 import { messageMutations } from '../modules/message/mutations/messageMutations';

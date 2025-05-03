@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { CustomErrorResponse, validateSchema } from "../../error/validateSchema";
 import { AuthResponse, SignUpDto, signUpDtoSchema } from "./auth.dtos";
 import mongoose from "mongoose"

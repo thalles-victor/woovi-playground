@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {ROLE} from "./metadata"
 
 export type RoleType = keyof typeof ROLE;

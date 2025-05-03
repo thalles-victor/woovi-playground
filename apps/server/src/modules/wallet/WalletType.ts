@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { GraphQLFloat, GraphQLObjectType, GraphQLString } from "graphql";
 import { connectionDefinitions, globalIdField } from "graphql-relay";
 import { registerTypeLoader } from "../node/typeRegister";

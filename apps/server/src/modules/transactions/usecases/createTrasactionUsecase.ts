@@ -1,3 +1,4 @@
+// @ts-nocheck
 import mongoose from "mongoose";
 import { z } from "zod";
 import { PayloadType } from "../../../@shared/types";

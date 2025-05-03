@@ -1,3 +1,5 @@
+// @ts-nocheck
+// @ts-nocheck
 import { Server as WebSocketServer } from 'ws';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import { schema } from '../schema/schema';

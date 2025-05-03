@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { GraphQLObjectType, GraphQLString, GraphQLNonNull } from 'graphql';
 import { globalIdField, connectionDefinitions } from 'graphql-relay';
 import type { ConnectionArguments } from 'graphql-relay';

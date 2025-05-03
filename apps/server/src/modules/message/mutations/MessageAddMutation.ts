@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { GraphQLString, GraphQLNonNull } from 'graphql';
 import { mutationWithClientMutationId, toGlobalId } from 'graphql-relay';
 

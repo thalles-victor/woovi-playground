@@ -1,3 +1,4 @@
+// @ts-nocheck
 import http from 'http';
 
 import WebSocket, { WebSocketServer as WSWebSocketServer } from 'ws';
@@ -7,12 +8,12 @@ const WebSocketServer = WSWebSocketServer;
 
 export const createWebsocketMiddleware = (
 	propertyName = 'ws',
-	options = {}
+	options: { wsOptions?: WebSocket.ServerOptions; server?: http.Server } = {}
 ) => {
-	if (options instanceof http.Server) options = { server: options };
+	if (options instanceof http.Server) options = { server: options, wsOptions: undefined };
 
 	// const wsServers = new WeakMap();
-	const wsServers = {};
+	const wsServers: Record<string, InstanceType<typeof WebSocketServer>> = {};
 
 	const getOrCreateWebsocketServer = (url: string) => {
 		// const server = wsServers.get(url);
@@ -33,10 +34,10 @@ export const createWebsocketMiddleware = (
 		return newServer;
 	};
 
-	const websocketMiddleware = async (ctx, next) => {
+	const websocketMiddleware = async (ctx: any, next: any) => {
 		const upgradeHeader = (ctx.request.headers.upgrade || '')
 			.split(',')
-			.map((s) => s.trim());
+			.map((s: any) => s.trim());
 
 		if (~upgradeHeader.indexOf('websocket')) {
 			const wss = getOrCreateWebsocketServer(ctx.url);

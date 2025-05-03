@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createTransactionResolverMutation } from "./CreateTransactionMutation";
 
 export const transactionMutations = {

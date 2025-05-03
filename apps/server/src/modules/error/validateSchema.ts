@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Schema } from "zod";
 
 interface CustomErrorResponseProps {

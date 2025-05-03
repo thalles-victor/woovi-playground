@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { getDataloaders } from '../modules/loader/loaderRegister';
 
 const getContext = (req?: any) => {

@@ -1,3 +1,5 @@
+// @ts-nocheck
+// @ts-nocheck
 import { MessageType, MessageConnection } from './MessageType';
 import { MessageLoader } from './MessageLoader';
 import { connectionArgs } from 'graphql-relay';

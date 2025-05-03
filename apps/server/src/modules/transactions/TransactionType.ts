@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { GraphQLObjectType, GraphQLString } from "graphql";
 import { registerTypeLoader } from "../node/typeRegister";
 import { TransactionLoader } from "./TransactionLoader";

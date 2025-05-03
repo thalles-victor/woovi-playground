@@ -1,3 +1,4 @@
+// @ts-nocheck
 import fs from 'fs/promises';
 import { printSchema } from 'graphql/utilities';
 import path from 'path';

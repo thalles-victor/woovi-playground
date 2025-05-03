@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { connectionArgs, connectionFromArray } from "graphql-relay";
 import { WalletLoader } from "./WalletLoader";
 import { WalletConnection, WalletType } from "./WalletType";

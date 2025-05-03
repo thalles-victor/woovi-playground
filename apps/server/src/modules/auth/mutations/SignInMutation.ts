@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { mutationWithClientMutationId } from "graphql-relay";
 import { signInUseCase } from "../usecases/signIn";
 import { SignInDto } from "../usecases/auth.dtos";

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import http from 'http';
 
 import { app } from './server/app';

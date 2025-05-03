@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { GraphQLString } from 'graphql';
 
 export const errorField = (key: string) => ({

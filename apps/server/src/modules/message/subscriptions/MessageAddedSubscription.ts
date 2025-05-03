@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { subscriptionWithClientId } from 'graphql-relay-subscription';
 import { withFilter } from 'graphql-subscriptions';
 

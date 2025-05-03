@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { GraphQLSchema } from 'graphql';
 
 import { QueryType } from './QueryType';

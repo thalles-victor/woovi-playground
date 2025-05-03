@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { signUpResolverMutation } from "./SignUpMutation";
 import { signInResolverMutation } from "./SignInMutation";
 

@@ -12,6 +12,45 @@ type Query {
     """Returns the last n items from the list."""
     last: Int
   ): MessageConnection
+  getWalletFromUser(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): Wallet
+  getAllWalletAsSuper(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): WalletConnection
+  getAllTransactionsAsSuper(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): TransactionConnection
 }
 
 """A connection to a list of items."""
@@ -61,8 +100,70 @@ interface Node {
   id: ID!
 }
 
+"""wallet from user"""
+type Wallet {
+  """The ID of an object"""
+  id: ID!
+  balance: Float
+  userId: String
+  cpfCnpj: String
+  createdAt: String
+  updatedAt: String
+  deletedAt: String
+}
+
+"""A connection to a list of items."""
+type WalletConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [WalletEdge]
+}
+
+"""An edge in a connection."""
+type WalletEdge {
+  """The item at the end of the edge"""
+  node: Wallet
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""A connection to a list of items."""
+type TransactionConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [TransactionEdge]
+}
+
+"""An edge in a connection."""
+type TransactionEdge {
+  """The item at the end of the edge"""
+  node: Transaction
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""transaction from user"""
+type Transaction {
+  id: String
+  fromCpfCnpj: String
+  toCpfCnpj: String
+  value: String
+  createdAt: String
+}
+
 type Mutation {
   MessageAdd(input: MessageAddInput!): MessageAddPayload
+  signUp(input: signUpInput!): signUpPayload
+  signIn(input: signInInput!): signInPayload
+
+  """Create a transaction"""
+  createTransaction(input: createTransactionInput!): createTransactionPayload
 }
 
 type MessageAddPayload {
@@ -73,6 +174,122 @@ type MessageAddPayload {
 input MessageAddInput {
   content: String!
   clientMutationId: String
+}
+
+type signUpPayload {
+  data: signUpResponse
+  clientMutationId: String
+}
+
+"""Auth response"""
+type signUpResponse {
+  user: userSignUpResponse
+  accessToken: accessTokenSignUpResponse
+}
+
+type userSignUpResponse {
+  name: String
+  email: String
+  createdAt: String
+  updatedAt: String
+  deletedAt: String
+  role: String
+}
+
+type accessTokenSignUpResponse {
+  token: String
+  expiresIn: String
+}
+
+input signUpInput {
+  signUpDto: singUpInputType
+  clientMutationId: String
+}
+
+"""Input type for sign up"""
+input singUpInputType {
+  name: String
+  email: String
+  password: String
+  cpfCnpj: String
+}
+
+type signInPayload {
+  data: signInResponse
+  clientMutationId: String
+}
+
+"""Auth response"""
+type signInResponse {
+  user: userSignInResponse
+  accessToken: accessTokenSignInResponse
+}
+
+type userSignInResponse {
+  name: String
+  email: String
+  createdAt: String
+  updatedAt: String
+  deletedAt: String
+  role: String
+}
+
+type accessTokenSignInResponse {
+  token: String
+  expiresIn: String
+}
+
+input signInInput {
+  signInDto: signInInputType
+  clientMutationId: String
+}
+
+"""Input type for sign in"""
+input signInInputType {
+  email: String
+  password: String
+}
+
+type createTransactionPayload {
+  data: createTransactionResponse
+  clientMutationId: String
+}
+
+"""Create transaction response"""
+type createTransactionResponse {
+  transaction: transactionCreateResponse
+  wallet: Wallet
+}
+
+type transactionCreateResponse {
+  """The id of the transaction"""
+  id: String
+
+  """the from cpf or cnpj of the transaction"""
+  fromCpfCnpj: String
+
+  """the to cpf or cnpj of the transaction"""
+  toCpfCnpj: String
+
+  """The description of the transaction"""
+  value: Int
+
+  """The description of the transaction"""
+  createdAt: String
+}
+
+input createTransactionInput {
+  transactionDto: createTransactionInputType
+  clientMutationId: String
+}
+
+"""Input type for creating a transaction"""
+input createTransactionInputType {
+  """The amount of the transaction"""
+  toCpfCnpj: String
+
+  """The description of the transaction"""
+  value: Int
 }
 
 type Subscription {

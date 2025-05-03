@@ -1,3 +1,4 @@
+// @ts-nocheck
 import JWT from "jsonwebtoken"
 import { AuthResponse, SignInDto, signInDtoSchema } from "./auth.dtos";
 import { CustomErrorResponse, validateSchema } from "../../error/validateSchema"

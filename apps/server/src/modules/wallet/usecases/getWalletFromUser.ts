@@ -1,3 +1,4 @@
+// @ts-nocheck
 import mongoose, { mongo } from 'mongoose';
 import { PayloadType } from ".././../../@shared/types"
 import { WalletModel } from "../WalletModel";

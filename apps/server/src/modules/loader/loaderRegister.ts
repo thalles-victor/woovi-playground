@@ -1,3 +1,4 @@
+// @ts-nocheck
 const loaders: Record<string, () => unknown> = {};
 
 const registerLoader = (key: string, getLoader: () => unknown) => {

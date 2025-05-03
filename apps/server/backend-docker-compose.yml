@@ -1,0 +1,38 @@
+services:
+  woovi-backend-app1:
+    container_name: woovi-backend-1
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: ${APPLICATION_STAGE}
+    ports:
+      - 4000:${PORT}
+    environment:
+      - PORT=${PORT}
+      - APPLICATION_STAGE=${APPLICATION_STAGE}
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - woovi-network
+
+  woovi-backend-app2:
+    container_name: woovi-backend-2
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: ${APPLICATION_STAGE}
+    ports:
+      - 4001:${PORT}
+    environment:
+      - PORT=${PORT}
+      - APPLICATION_STAGE=${APPLICATION_STAGE}
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - woovi-network
+
+networks:
+  woovi-network:
+    external: true

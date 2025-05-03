@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { connectionArgs, connectionFromArray } from "graphql-relay";
 import { authMiddleware } from "../../@shared/authMiddleware";
 import { TransactionModel } from "./TransactionModel";

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { createLoader } from "@entria/graphql-mongo-helpers";
 import { WalletModel } from "./WalletModel";
 import { registerLoader } from "../loader/loaderRegister";

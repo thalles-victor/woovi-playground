@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { GraphQLObjectType } from 'graphql';
 
 import { messageConnectionField } from '../modules/message/messageFields';

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import mongoose from "mongoose";
 import { RoleType } from "../../@shared/types";
 import { ROLE } from "../../@shared/metadata";

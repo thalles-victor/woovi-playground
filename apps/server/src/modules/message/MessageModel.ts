@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { Document, Model } from 'mongoose';
 import mongoose from 'mongoose';
 

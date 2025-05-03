@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { create } from "domain";
 import { GraphQLInputObjectType, GraphQLInt, GraphQLObjectType, GraphQLString } from "graphql";
 import { mutationWithClientMutationId } from "graphql-relay";

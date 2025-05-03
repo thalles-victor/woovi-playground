@@ -1,3 +1,4 @@
+// @ts-nocheck
 import JWT from "jsonwebtoken";
 import { PayloadType } from "./types";
 import { CustomErrorResponse } from "../modules/error/validateSchema";

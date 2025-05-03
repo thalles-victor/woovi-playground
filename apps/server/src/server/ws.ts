@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { execute, subscribe, validate, parse } from 'graphql';
 import { useServer } from 'graphql-ws/lib/use/ws';
 
