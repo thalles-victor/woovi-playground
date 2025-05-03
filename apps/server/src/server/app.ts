@@ -11,6 +11,9 @@ import { getContext } from './getContext';
 import { createWebsocketMiddleware } from './websocketMiddleware';
 import * as fs from 'fs';
 import * as path from 'path';
+import rateLimit from "koa-ratelimit"
+import Redis from "ioredis"
+import { envParsed } from '../config';
 
 const app = new Koa();
 
@@ -25,6 +28,22 @@ app.use(
 );
 
 app.use(createWebsocketMiddleware());
+
+// apply rate limit
+app.use(rateLimit({
+	driver: 'redis',
+	db: new Redis(envParsed.REDIS_HOST),
+	duration: 5 * 1000,
+	max: 10,
+	errorMessage: 'Sometimes You Just Have to Slow Down.',
+	id: (ctx) => ctx.ip,
+	headers: {
+		remaining: 'Rate-Limit-Remaining',
+		reset: 'Rate-Limit-Reset',
+		total: 'Rate-Limit-Total'
+	},
+	disableHeader: false,
+}));
 
 const routes = new Router();
 
