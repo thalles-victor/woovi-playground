@@ -51,92 +51,11 @@
 
 ## Getting Started
 
-To get a local copy up and running follow these simple example steps.
+🧱 Este projeto é um fork de um boilerplate fornevido pela [woovi](https://woovi.com/) que está disponível em: https://github.com/woovibr/woovi-playground
 
-### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+⚙️ Para saber como executar o projeto consulte o [README](apps/server/README.md) na pasta [/apps/server/README.md](./apps/server/). Lá tem todos os detalhes de como configurar e executar e a documentação da api.
 
-- Node.js
-
-  ```sh
-  https://nodejs.org/en/download/
-  ```
-
-- PNPM
-
-  ```sh
-  npm install pnpm -g
-  ```
-
-- Docker
-
-  ```sh
-  https://www.docker.com/get-started/
-  ```
-
-## Installation
-
-Clone the repo
-
-```sh
-git clone https://github.com/entria/woovi-playground.git
-```
-
-1. Install packages
-
-   ```sh
-   pnpm install
-   ```
-
-2. Run the container(or stop it, if necessary):
-  
-   ```sh
-   pnpm compose:up
-   ```
-
-3. Setup Configuration
-
-   ```sh
-   pnpm config:local
-   ```
-
-4. Run the relay
-
-    ```sh
-    pnpm relay
-    ```
-
-5. Run the Project
-
-   ```sh
-   pnpm dev
-   ```
-
-<!-- CONTRIBUTING -->
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/amazing-feature`)
-3. Commit your Changes (`git commit -m 'feat(amazing-feature): my feature is awesome'`)
-4. Push to the Branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- CONTACT -->
-
-## Contact
-
-Project Link: [https://github.com/entria/woovi-playground](https://github.com/entria/woovi-playground)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

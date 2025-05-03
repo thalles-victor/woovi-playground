@@ -1,5 +1,5 @@
-# micro-saas-vagas
-
+# 🏦 Woovi backend 💰
+ 
 O sistema bancário desenvolvido para o teste técnico da Woovi é uma aplicação simplificada que simula operações essenciais de um banco digital. Ele permite o gerenciamento de clientes, criação de contas bancárias, controle de saldo e realização de transferências entre contas. Com foco em segurança, consistência de dados.O sistema serve como base para demonstrar conceitos fundamentais de back-end aplicados ao contexto financeiro. 🚀
 
 ### 🛠 Pendendências nescessárias.
@@ -10,11 +10,11 @@ Este projeto precisa do node com o docker instalados, se caso não tenha, consul
 
 [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/) é uma plataforma de software de código aberto que permite criar, gerenciar e executar aplicações em contêineres virtuais. É uma ferramenta útil para quem trabalha com desenvolvimento de software e administração de sistemas
 
-## Configurando op projeto
+## 🪛 Configurando o projeto
 
 Ates de rodarmos de fato o projeto, é nescessário configura-lo instlando as dependências e criando as variáveis de ambiente.
 
-### instalando as dependências
+### ➕ instalando as dependências
 
 Para instlar as dependência certifique se que o terminal esteja apontado para a pasta [/apps/server](./) e rode o comando abaixo
 
@@ -22,7 +22,7 @@ Para instlar as dependência certifique se que o terminal esteja apontado para a
 npm install --legacy-peer-deps
 ```
 
-### Configurando as variáveis de ambiente
+### 🛡️ Configurando as variáveis de ambiente
 
 O schema das variáveis de ambiente está descrito abaixo. As que já estão declaradas não são sensíveis e pode ser mudadas de acordo com a preferência do desenvolvedor. Já as que não estão declaradas são sensíveis e por isso não foi declaradas. Você pode consultar a equipe de desenvolvimento ou buscar nas nos provedores (sites) onde encontra-lás para preencher.
 
@@ -47,7 +47,7 @@ JWT_SECRET_EXPIRES_IN="1d"
 
 - 🎯 O modo como o backend vai rodar está definido na APPLICATION_STAGE, para desenvolvimento é recomendado que deixe como (dev), já para ambientes de produção o parâmetro deve ser (prod).
 
-- 🛡️ Para gerar as secrets do JWT você pode rodar o seguinte comando, lembrando que no mínimo tem que ter 100 caracteres para impedir que os tokens sejam quebrados.
+- 🔐 Para gerar as secrets do JWT você pode rodar o seguinte comando, lembrando que no mínimo tem que ter 100 caracteres para impedir que os tokens sejam quebrados.
 
 ```
 node -e "console.log(require('crypto').randomBytes(200).toString('base64'))"
@@ -76,6 +76,6 @@ c81145fb27d0   server-woovi-backend-app1   "docker-entrypoint.s…"   2 hours ag
 a6128027ac92   mongo                       "docker-entrypoint.s…"   4 hours ago   Up 2 hours (healthy)   0.0.0.0:27017->27017/tcp, [::]:27017->27017/tcp   mongodb
 bbd63bbbbf51   redis                       "docker-entrypoint.s…"   4 hours ago   Up 2 hours             0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp       redis
 ```
-## Acessando a aplicação
+## 🏁 Acessando a aplicação
 
 Para acessar a apicação você pode consultar com algum client http na url http://localhost:4000 para o servidor 1 e http://localhost:4001 para o servidor 2, além disso nos endpoints /graphql vai encontrar o playground graphql para testar sua api.
