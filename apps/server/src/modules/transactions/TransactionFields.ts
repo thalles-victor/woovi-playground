@@ -11,7 +11,7 @@ export const transactionConnectField = () => ({
     },
     resolve: async (_, args, context) => {
       const authorization = context["headers"]["authorization"]
-      await authMiddleware(authorization, ["ADMIN", "ROOT"])
+      // await authMiddleware(authorization, ["ADMIN", "ROOT"])
 
       const allTransactions = await TransactionModel.find().lean();
 
