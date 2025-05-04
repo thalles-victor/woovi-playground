@@ -27,11 +27,11 @@ npm install --legacy-peer-deps
 O schema das variáveis de ambiente está descrito abaixo. As que já estão declaradas não são sensíveis e pode ser mudadas de acordo com a preferência do desenvolvedor. Já as que não estão declaradas são sensíveis e por isso não foi declaradas. Você pode consultar a equipe de desenvolvimento ou buscar nas nos provedores (sites) onde encontra-lás para preencher.
 
 ```env
-# Backend
+# Environment variables for the server application 
 PORT=4000
 APPLICATION_STAGE="dev" # dev | prod
 
-# Mongo
+# MongoDB
 MONGO_URI="mongodb://mongodb:27017/woovi-playground?replicaSet=rs0&authSource=admin"
 
 # Redis
@@ -40,6 +40,9 @@ REDIS_HOST="redis://redis:6379"
 # Jwt
 JWT_SECRET=
 JWT_SECRET_EXPIRES_IN="1d"
+
+# ADMIN
+ADMIN_EMAIL="root@gmail.com"
 ```
 
 - 🔑 Para ter acesso ao root, as credenciais do mesmo devem ser passadas no arquivo env, passando o id ele vai criar o usuário e salvar no banco na hóra que o dono do id fazer a autenticação com o discord.
