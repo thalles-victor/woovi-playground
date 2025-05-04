@@ -45,7 +45,7 @@ JWT_SECRET_EXPIRES_IN="1d"
 ADMIN_EMAIL="root@gmail.com"
 ```
 
-- 🔑 Para ter acesso ao root, as credenciais do mesmo devem ser passadas no arquivo env, passando o id ele vai criar o usuário e salvar no banco na hóra que o dono do id fazer a autenticação com o discord.
+- 🔑 Para ter acesso ao admin, as credenciais do mesmo devem ser passadas no arquivo env, e logo em seguida fazer o cadastro do mesmo.
 
 - 🎯 O modo como o backend vai rodar está definido na APPLICATION_STAGE, para desenvolvimento é recomendado que deixe como (dev), já para ambientes de produção o parâmetro deve ser (prod).
 
@@ -57,7 +57,7 @@ node -e "console.log(require('crypto').randomBytes(200).toString('base64'))"
 
 se caso a aplicação não rodar por um erro como esse siguinifica que as variáveis de ambiente não foram passadas corretamente e é recomendavel que consulte a documentação para sincronizar com o arquivo .env: 
 
-```
+```terminal
 ZodError: [
   {
     "code": "invalid_type",
